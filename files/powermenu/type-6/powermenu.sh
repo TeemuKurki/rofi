@@ -56,7 +56,9 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$suspend\n$logout\n$hibernate\n$reboot\n$shutdown" | rofi_cmd
+	# Order of variables defines the order of buttons on grid
+	echo -e "$shutdown\n$lock\n$suspend\n$logout\n$reboot" | rofi_cmd
+	#echo -e "$lock\n$suspend\n$logout\n$hibernate\n$reboot\n$shutdown" | rofi_cmd
 }
 
 # Execute Command
@@ -67,8 +69,8 @@ run_cmd() {
 			systemctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
-		elif [[ $1 == '--hibernate' ]]; then
-			systemctl hibernate
+		#elif [[ $1 == '--hibernate' ]]; then
+		#		systemctl hibernate
 		elif [[ $1 == '--suspend' ]]; then
 			mpc -q pause
 			amixer set Master mute
